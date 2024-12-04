@@ -64,9 +64,10 @@ Este tutorial te guiará en la configuración de un servidor DNS maestro utiliza
                               2419200    ; Expire
                               604800 )   ; Negative Cache TTL
    ;
-           IN      NS      ns1.vinylo.org.
-           IN      NS      ns2.vinylo.org.
-
+   @        IN      NS      ns1.vinylo.org.
+            IN      NS      ns2.vinylo.org.
+   
+   @       IN      A       192.168.1.14
    ns1     IN      A       192.168.1.14
    ns2     IN      A       192.168.1.28
    www     IN      A       192.168.1.13
@@ -99,6 +100,7 @@ Este tutorial te guiará en la configuración de un servidor DNS maestro utiliza
            IN      NS      ns1.vinylo.org.
            IN      NS      ns2.vinylo.org.
 
+   14      IN      PTR     vinylo.org.
    14      IN      PTR     ns1.vinylo.org.
    28      IN      PTR     ns2.vinylo.org.
    13      IN      PTR     www.vinylo.org.
