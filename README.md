@@ -46,31 +46,31 @@ El DNS se basa en una estructura jerárquica de servidores que proporcionan las 
 A continuación se muestra un diagrama que representa la topología del sistema DNS y cómo se realiza la resolución de nombres:
 
 ```
-+-----------------+
-|  Cliente (PC)   |
-+--------+--------+
++--------------------+
+|    Cliente (PC)    |
++--------+-----------+
          |
          v
-+--------+--------+
++--------+-----------+
 | Servidor Recursivo |
-+--------+--------+
++--------+-----------+
          |
          v
-+--------+--------+
++--------+----------+
 |   Servidor Raíz   |
-+--------+--------+
++--------+----------+
          |
          v
-+--------+--------+
-|   Servidor TLD   |
++--------+-----------+
+|    Servidor TLD    |
 | (.com, .org, etc.) |
-+--------+--------+
++--------+-----------+
          |
          v
-+--------+--------+
++--------+--------------+
 | Servidor Autoritativo |
-|  (vinylo.org)   |
-+-----------------+
+|     (vinylo.org)      |
++-----------------------+
 ```
 
 - **Cliente**: Dispositivo que inicia la consulta DNS.
