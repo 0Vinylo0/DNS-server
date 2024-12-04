@@ -57,6 +57,7 @@ Este tutorial te guiará en la configuración de un servidor DNS maestro utiliza
    Utiliza el siguiente contenido como plantilla para el archivo de zona:
    ```plaintext
    $TTL    604800
+   $ORIGIN vinylo.org.
    @       IN      SOA     ns1.vinylo.org. root.vinylo.org. (
                               2023120101 ; Serial (formato AAAAMMDDNN)
                               604800     ; Refresh
@@ -90,6 +91,7 @@ Este tutorial te guiará en la configuración de un servidor DNS maestro utiliza
    Utiliza el siguiente contenido como plantilla para el archivo de zona inversa:
    ```plaintext
    $TTL    604800
+   $ORIGIN 1.168.192.in-addr.arpa.
    @       IN      SOA     ns1.vinylo.org. root.vinylo.org. (
                               2023120101 ; Serial (formato AAAAMMDDNN)
                               604800     ; Refresh
