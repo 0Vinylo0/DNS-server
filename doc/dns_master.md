@@ -73,6 +73,7 @@ Este tutorial te guiará en la configuración de un servidor DNS maestro utiliza
    ns2     IN      A       192.168.1.28
    www     IN      A       192.168.1.13
    ```
+   - **`$ORIGIN`**: Define el punto de partida o base del nombre de dominio en un archivo de zona DNS.
    - **`$TTL`**: Define el tiempo de vida de los registros en la caché.
    - **`SOA`**: Define el servidor de autoridad y los parámetros de la zona.
    - **`NS`**: Define los servidores de nombres de la zona.
@@ -107,6 +108,7 @@ Este tutorial te guiará en la configuración de un servidor DNS maestro utiliza
    28      IN      PTR     ns2.vinylo.org.
    13      IN      PTR     www.vinylo.org.
    ```
+   - **`$ORIGIN`**: Define el punto de partida o base del nombre de dominio en un archivo de zona DNS.
    - **`$TTL`**: Define el tiempo de vida de los registros en la caché.
    - **`SOA`**: Define el servidor de autoridad y los parámetros de la zona inversa.
    - **`NS`**: Define los servidores de nombres de la zona.
