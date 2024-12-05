@@ -41,6 +41,8 @@ El DNS se basa en una estructura jerárquica de servidores que proporcionan las 
 
 - [DNS esclavo](doc/dns_esclavo.md)
 
+- [DDNS](doc/ddns.md)
+
 ## Diagrama de la Topología del DNS
 
 A continuación se muestra un diagrama que representa la topología del sistema DNS y cómo se realiza la resolución de nombres:
