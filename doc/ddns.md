@@ -44,7 +44,7 @@ Para permitir que el servidor DHCP actualice la zona DNS, es necesario usar una 
 
 ```bash
 cd /etc/bind
-sudo tsig-keygen -a HMAC-SHA256 -b 256 -n USER dhcpupdate
+sudo tsig-keygen -a HMAC-SHA256 nombredominio.org
 ```
 
 Esto generará dos archivos (`.key` y `.private`). Incluye el archivo `.key` generado en el archivo de configuración `/etc/bind/named.conf.local`:
@@ -75,7 +75,7 @@ zone 1.168.192.in-addr.arpa. {
     key dhcpupdate;
 }
 # Clave TSIG para la actualización DDNS
-key dhcpupdate {
+key "dhcpupdate" {
     algorithm HMAC-SHA256;
     secret "clave_generada";
 }
