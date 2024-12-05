@@ -22,20 +22,17 @@ sudo apt install bind9 isc-dhcp-server
 
 ### Crear la Clave TSIG
 
-Para permitir que el servidor DHCP actualice la zona DNS, es necesario usar una clave TSIG. Crea la clave con el comando `dnssec-keygen`:
+Para permitir que el servidor DHCP actualice la zona DNS, es necesario usar una clave TSIG. Crea la clave con el comando `tsig-keygen`:
 
 ```bash
 cd /etc/bind
-sudo dnssec-keygen -a HMAC-SHA256 -b 256 -n USER dhcpupdate
+sudo tsig-keygen -a HMAC-SHA256 nombredominio.org
 ```
 
-Esto generará dos archivos (`.key` y `.private`). Copia la clave del archivo `.key` y agrégala al archivo `/etc/bind/named.conf.local`:
+Esto generará dos archivos (`.key` y `.private`). Incluye el archivo `.key` generado en el archivo de configuración `/etc/bind/named.conf.local`:
 
 ```bash
-key "dhcpupdate" {
-    algorithm HMAC-SHA256;
-    secret "clave_generada";
-};
+include "/etc/bind/dhcpupdate.key";
 ```
 
 ## Paso 3: Configuración de ISC-DHCP-Server
@@ -90,7 +87,6 @@ sudo systemctl restart isc-dhcp-server
 ```
 
 ## Verificación
-
 Para comprobar que las actualizaciones se están realizando correctamente, puedes revisar los archivos de registro de BIND y DHCP:
 
 ```bash
