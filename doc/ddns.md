@@ -20,13 +20,31 @@ sudo apt install bind9 isc-dhcp-server
 
 ## Paso 2: Configuración de BIND9
 
+### Configuración de las Zonas en named.conf.local
+
+Edita el archivo `/etc/bind/named.conf.local` para agregar la configuración de las zonas. Añade la configuración para permitir actualizaciones utilizando la clave TSIG:
+
+```bash
+zone "example.com" {
+    type master;
+    file "/etc/bind/db.example.com";
+    allow-update { key "dhcpupdate"; };
+};
+
+zone "1.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/db.192.168.1";
+    allow-update { key "dhcpupdate"; };
+};
+```
+
 ### Crear la Clave TSIG
 
 Para permitir que el servidor DHCP actualice la zona DNS, es necesario usar una clave TSIG. Crea la clave con el comando `tsig-keygen`:
 
 ```bash
 cd /etc/bind
-sudo tsig-keygen -a HMAC-SHA256 nombredominio.org
+sudo tsig-keygen -a HMAC-SHA256 -b 256 -n USER dhcpupdate
 ```
 
 Esto generará dos archivos (`.key` y `.private`). Incluye el archivo `.key` generado en el archivo de configuración `/etc/bind/named.conf.local`:
@@ -37,9 +55,25 @@ include "/etc/bind/dhcpupdate.key";
 
 ## Paso 3: Configuración de ISC-DHCP-Server
 
-Edita el archivo de configuración de DHCP ubicado en `/etc/dhcp/dhcpd.conf` para incluir la configuración de DDNS:
+Edita el archivo de configuración de DHCP ubicado en `/etc/dhcp/dhcpd.conf` para incluir la configuración de DDNS y definir las zonas.
+
+### Configuración del archivo dhcpd.conf
+
+Edita el archivo de configuración de DHCP ubicado en `/etc/dhcp/dhcpd.conf` para incluir la configuración de DDNS y las zonas correspondientes:
 
 ```bash
+# Habilitar el uso de los nombres definidos en las declaraciones de host
+
+# Configuración de las zonas para DDNS
+zone example.com. {
+    primary 127.0.0.1;
+    key dhcpupdate;
+}
+
+zone 1.168.192.in-addr.arpa. {
+    primary 127.0.0.1;
+    key dhcpupdate;
+}
 # Clave TSIG para la actualización DDNS
 key dhcpupdate {
     algorithm HMAC-SHA256;
@@ -63,6 +97,7 @@ subnet 192.168.1.0 netmask 255.255.255.0 {
     option domain-name "example.com";
     option domain-name-servers 192.168.1.1;
     option routers 192.168.1.1;
+    use-host-decl-names on;
 }
 ```
 
