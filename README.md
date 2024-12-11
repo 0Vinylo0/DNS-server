@@ -35,7 +35,7 @@ El DNS se basa en una estructura jerárquica de servidores que proporcionan las 
 3. **Servidor TLD**: Gestiona los dominios de nivel superior como `.com`, `.org`, etc.
 4. **Servidor Autoritativo**: Tiene la respuesta definitiva para una zona específica, como los registros A de un dominio.
 
-## Configuracion de DNS maestro y DNS esclavo
+## Configuracion de DNS maestro, DNS esclavo y DDNS
 
 - [DNS maestro](doc/dns_master.md)
 
