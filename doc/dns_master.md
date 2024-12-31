@@ -57,36 +57,36 @@ Este tutorial te guiará en la configuración de un servidor DNS maestro utiliza
    Utiliza el siguiente contenido como plantilla para el archivo de zona:
    ```plaintext
    $TTL    604800
-    $ORIGIN vinylo.org.
-    @       IN      SOA     ns1.vinylo.org. root.vinylo.org. (
-                               2023120101 ; Serial (formato AAAAMMDDNN)
-                               604800     ; Refresh
-                               86400      ; Retry
-                               2419200    ; Expire
-                               604800 )   ; Negative Cache TTL
-    ;
-    @        IN      NS      ns1.vinylo.org.
-             IN      NS      ns2.vinylo.org.
+   $ORIGIN vinylo.org.
+   @       IN      SOA     ns1.vinylo.org. root.vinylo.org. (
+                              2023120101 ; Serial (formato AAAAMMDDNN)
+                              604800     ; Refresh
+                              86400      ; Retry
+                             2419200    ; Expire
+                              604800 )   ; Negative Cache TTL
+   ;
+   @        IN      NS      ns1.vinylo.org.
+            IN      NS      ns2.vinylo.org.
     
-    ; Direcciones IP principales
-    @       IN      A       192.168.1.14
-    ns1     IN      A       192.168.1.14
-    ns2     IN      A       192.168.1.28
-    www     IN      A       192.168.1.13
+   ; Direcciones IP principales
+   @       IN      A       192.168.1.14
+   ns1     IN      A       192.168.1.14
+   ns2     IN      A       192.168.1.28
+   www     IN      A       192.168.1.13
     
-    ; Servidor de correo
-    @       IN      MX 10  mail.vinylo.org.
-    mail    IN      A       192.168.1.15
+   ; Servidor de correo
+   @       IN      MX 10  mail.vinylo.org.
+   mail    IN      A       192.168.1.15
     
-    ; Servidor FTP
-    ftp     IN      A       192.168.1.16
+   ; Servidor FTP
+   ftp     IN      A       192.168.1.16
     
-    ; Servidor de chat
-    chat    IN      A       192.168.1.17
+   ; Servidor de chat
+   chat    IN      A       192.168.1.17
     
-    ; Alias (CNAME) para simplificar accesos
-    webmail IN      CNAME   mail.vinylo.org.
-    docs    IN      CNAME   www.vinylo.org.
+   ; Alias (CNAME) para simplificar accesos
+   webmail IN      CNAME   mail.vinylo.org.
+   docs    IN      CNAME   www.vinylo.org.
    ```
    - **`$ORIGIN`**: Define el punto de partida o base del nombre de dominio en un archivo de zona DNS.
    - **`$TTL`**: Define el tiempo de vida de los registros en la caché.
